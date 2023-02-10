@@ -33,10 +33,10 @@ const UploadFiles:React.FC<Props> = ({ data, setData }) => {
     
         uploadFile(currentFile, (event: { loaded: number; total: number; }) => {
           setProgress(Math.round((100 * event.loaded) / event.total));
+          setData({prediction: "pending", probability: "pending"});
         })
           .then((response) => {
             setMessage(response.data.message);
-            setData({prediction: "pending", probability: "pending"});
             setTimeout(() => {
               setData(response.data)
             }, 1000);
